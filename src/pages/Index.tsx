@@ -4,10 +4,12 @@ import { StatsCards } from "@/components/StatsCards";
 import { RequestsTable } from "@/components/RequestsTable";
 import { CommitteeView } from "@/components/CommitteeView";
 import { NewRequestDialog } from "@/components/NewRequestDialog";
-import { Landmark, FileText, Plus, Users, LayoutDashboard } from "lucide-react";
+import { ProcessFlow } from "@/components/ProcessFlow";
+import { PolicyGuide } from "@/components/PolicyGuide";
+import { Landmark, FileText, Plus, Users, LayoutDashboard, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-type Tab = "dashboard" | "committee";
+type Tab = "dashboard" | "committee" | "policy";
 
 const Index = () => {
   const [requests, setRequests] = useState<SignageRequest[]>(mockRequests);
@@ -25,6 +27,12 @@ const Index = () => {
   };
 
   const nextId = requests.length + 1;
+
+  const tabs = [
+    { key: "dashboard" as Tab, label: "לוח בקרה", icon: LayoutDashboard },
+    { key: "policy" as Tab, label: "נוהל והנחיות", icon: BookOpen },
+    { key: "committee" as Tab, label: "ועדה", icon: Users },
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -56,28 +64,20 @@ const Index = () => {
       {/* Tab Navigation */}
       <div className="border-b border-border bg-card">
         <div className="mx-auto flex max-w-7xl gap-1 px-6">
-          <button
-            onClick={() => setActiveTab("dashboard")}
-            className={`flex items-center gap-1.5 border-b-2 px-4 py-3 text-sm font-medium transition-colors ${
-              activeTab === "dashboard"
-                ? "border-primary text-primary"
-                : "border-transparent text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            <LayoutDashboard className="h-4 w-4" />
-            לוח בקרה
-          </button>
-          <button
-            onClick={() => setActiveTab("committee")}
-            className={`flex items-center gap-1.5 border-b-2 px-4 py-3 text-sm font-medium transition-colors ${
-              activeTab === "committee"
-                ? "border-primary text-primary"
-                : "border-transparent text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            <Users className="h-4 w-4" />
-            ועדה
-          </button>
+          {tabs.map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              className={`flex items-center gap-1.5 border-b-2 px-4 py-3 text-sm font-medium transition-colors ${
+                activeTab === tab.key
+                  ? "border-primary text-primary"
+                  : "border-transparent text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <tab.icon className="h-4 w-4" />
+              {tab.label}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -90,11 +90,27 @@ const Index = () => {
               <p className="mt-1 text-sm text-muted-foreground">סקירה כללית של בקשות שילוט וסטטוס אישורים</p>
             </div>
             <div className="space-y-6">
+              <ProcessFlow />
               <StatsCards requests={requests} />
               <div>
                 <h3 className="mb-3 text-lg font-semibold text-foreground">כל הבקשות</h3>
                 <RequestsTable requests={requests} onUpdateRequest={handleUpdateRequest} />
               </div>
+            </div>
+          </>
+        )}
+
+        {activeTab === "policy" && (
+          <>
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold text-foreground">נוהל והנחיות עיצוביות</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                קטגוריות השילוט, סוגי השלטים, הנחיות עיצוביות ונוהל אישור לכל קטגוריה
+              </p>
+            </div>
+            <ProcessFlow />
+            <div className="mt-6">
+              <PolicyGuide />
             </div>
           </>
         )}
