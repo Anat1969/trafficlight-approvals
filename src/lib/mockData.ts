@@ -41,6 +41,26 @@ export const REQUIRED_DOCUMENTS = [
 
 export const mockRequests: SignageRequest[] = [
   {
+    id: "SH-2025-007",
+    businessName: "פרויקט מגורים נווה גליל",
+    applicantName: "חברת נופי בנייה בע״מ",
+    applicantEmail: "office@nofi-build.co.il",
+    applicantPhone: "08-6560690",
+    signType: "שלט באתר בנייה",
+    location: "רח׳ נחל לכיש, אשדוד",
+    status: "new",
+    submittedAt: "2025-02-15",
+    updatedAt: "2025-02-15",
+    notes: "בקשה חדשה - מסמכים הועלו, ממתין לבדיקה",
+    documents: [
+      { name: "תצלום חזית העסק", uploaded: true },
+      { name: "הדמיית השלט", uploaded: true },
+      { name: "תוכנית מדידה", uploaded: true },
+      { name: "אישור קונסטרוקטור", uploaded: true },
+      { name: "רישיון עסק", uploaded: true },
+    ],
+  },
+  {
     id: "SH-2024-001",
     businessName: "קפה שמש",
     applicantName: "יוסי כהן",
