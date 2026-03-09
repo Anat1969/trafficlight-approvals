@@ -62,19 +62,22 @@ export default function NewRequest() {
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="mx-auto max-w-4xl space-y-6">
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" onClick={() => navigate("/")}>
-            <ArrowRight className="h-4 w-4" />
+        <div className="flex items-center gap-4 animate-fade-in">
+          <Button variant="ghost" size="icon" onClick={() => navigate("/")} className="hover:bg-primary/10 hover:text-primary transition-colors">
+            <ArrowRight className="h-5 w-5" />
           </Button>
           <div>
-            <h1 className="text-2xl font-bold text-foreground">הגשת בקשה לשילוט</h1>
-            <p className="text-muted-foreground">אנא מלא את כל פרטי הבקשה בהתאם להנחיות</p>
+            <h1 className="text-3xl font-bold tracking-tight text-foreground gradient-text">הגשת בקשה לשילוט</h1>
+            <p className="text-muted-foreground mt-1 text-balance">אנא מלא את כל פרטי הבקשה בהתאם להנחיות העירוניות</p>
           </div>
         </div>
 
-        <div className="rounded-lg border bg-card p-6 shadow-sm space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-lg font-semibold border-b pb-2">פרטים כלליים</h2>
+        <div className="card-elevated p-8 space-y-10 animate-fade-in" style={{ animationDelay: "100ms" }}>
+          <div className="space-y-6">
+            <h2 className="text-xl font-semibold border-b border-border/60 pb-3 flex items-center gap-2">
+              <span className="bg-primary/10 text-primary p-1.5 rounded-md">1</span>
+              פרטים כלליים
+            </h2>
             
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
