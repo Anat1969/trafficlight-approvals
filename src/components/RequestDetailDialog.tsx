@@ -138,8 +138,21 @@ export function RequestDetailDialog({ request, onClose, onUpdate }: Props) {
               <h3 className="mb-3 text-sm font-semibold text-muted-foreground">פרטי המגיש</h3>
               <div className="space-y-2 text-sm">
                 <div className="font-medium">{request.applicantName}</div>
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <Mail className="h-3.5 w-3.5" /> {request.applicantEmail}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 text-muted-foreground">
+                    <Mail className="h-3.5 w-3.5" /> {request.applicantEmail}
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="h-7 text-xs"
+                    onClick={() => {
+                      window.location.href = `mailto:${request.applicantEmail}?subject=בקשה לשילוט מספר ${request.id} - עיריית דוגמה&body=שלום ${request.applicantName},%0D%0A%0D%0Aבנוגע לבקשתך מתאריך ${request.submittedAt}:%0D%0A%0D%0A`;
+                    }}
+                  >
+                    <Mail className="ml-1.5 h-3 w-3" />
+                    שלח מייל
+                  </Button>
                 </div>
                 <div className="flex items-center gap-1.5 text-muted-foreground">
                   <Phone className="h-3.5 w-3.5" /> {request.applicantPhone}
