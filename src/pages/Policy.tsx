@@ -189,9 +189,6 @@ export default function Policy() {
                   onDragLeave={() => setDragOverId(null)}
                   onDrop={(e) => handleDrop(policy.id, e)}
                 >
-                  <Badge className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center text-lg rounded-full">
-                    {policy.imageNumber}
-                  </Badge>
                   {images[policy.id] ? (
                     <>
                       <img 
