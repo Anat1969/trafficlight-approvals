@@ -177,7 +177,18 @@ export default function Policy() {
           {policies.map((policy) => (
             <Card key={policy.id} className="overflow-hidden">
               <div className="md:flex">
-                <div className="md:w-1/3 bg-muted flex flex-col items-center justify-center p-6 relative overflow-hidden min-h-[200px]">
+                <div
+                  className={`md:w-1/3 bg-muted flex flex-col items-center justify-center p-6 relative overflow-hidden min-h-[200px] transition-all outline-none ${
+                    dragOverId === policy.id ? "ring-2 ring-primary bg-primary/10" : ""
+                  } ${focusedId === policy.id ? "ring-2 ring-primary/50" : ""}`}
+                  tabIndex={0}
+                  onFocus={() => setFocusedId(policy.id)}
+                  onBlur={() => setFocusedId(null)}
+                  onPaste={(e) => handlePaste(policy.id, e)}
+                  onDragOver={(e) => { e.preventDefault(); setDragOverId(policy.id); }}
+                  onDragLeave={() => setDragOverId(null)}
+                  onDrop={(e) => handleDrop(policy.id, e)}
+                >
                   <Badge className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center text-lg rounded-full">
                     {policy.imageNumber}
                   </Badge>
@@ -198,8 +209,9 @@ export default function Policy() {
                       </Button>
                     </>
                   ) : (
-                    <div className="flex flex-col items-center gap-3 text-muted-foreground">
+                    <div className="flex flex-col items-center gap-3 text-muted-foreground text-center">
                       <ImagePlus className="h-12 w-12" />
+                      <p className="text-xs">גרור תמונה לכאן, הדבק (Ctrl+V), או</p>
                       <Button
                         variant="outline"
                         size="sm"
