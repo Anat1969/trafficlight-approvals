@@ -4,7 +4,7 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuL
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ImagePlus, X } from "lucide-react";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback, DragEvent, ClipboardEvent } from "react";
 
 export default function Policy() {
   const [images, setImages] = useState<Record<string, string>>({});
