@@ -194,12 +194,39 @@ export default function NewRequest() {
               </div>
 
               {fenceNum > 0 && (
-                <div className="rounded-md bg-muted p-4 mt-4 text-sm text-center">
-                  <p>חלוקת <strong>גדר מדברת</strong> נדרשת עבור {fenceNum} מטרים:</p>
-                  <div className="flex justify-center gap-8 mt-2 text-base">
-                    <div className="font-semibold text-primary">{fenceNum / 2} מטר - תכנים עירוניים</div>
-                    <div className="font-semibold text-blue-600">{fenceNum / 2} מטר - תוכן יזמי</div>
-                  </div>
+                <div className="rounded-md border bg-card p-4 mt-4 shadow-sm">
+                  <h3 className="font-semibold text-lg mb-4">חישוב חלוקת גדר מדברת ואגרת שילוט</h3>
+                  
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="text-right">סה"כ אורך מבוקש</TableHead>
+                        <TableHead className="text-right">תכנים עירוניים (50%)</TableHead>
+                        <TableHead className="text-right">תוכן יזמי (50%)</TableHead>
+                        <TableHead className="text-right">עלות שילוט למטר (₪)</TableHead>
+                        <TableHead className="text-right font-bold">סה"כ אגרת שילוט ליזם</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell>{fenceNum} מטרים</TableCell>
+                        <TableCell className="text-primary font-medium">{fenceNum / 2} מטרים</TableCell>
+                        <TableCell className="text-blue-600 font-medium">{fenceNum / 2} מטרים</TableCell>
+                        <TableCell>
+                          <Input
+                            type="number"
+                            value={form.costPerMeter}
+                            onChange={(e) => setForm({ ...form, costPerMeter: e.target.value })}
+                            placeholder="הזן תעריף..."
+                            className="w-32"
+                          />
+                        </TableCell>
+                        <TableCell className="font-bold text-lg text-green-600">
+                          {form.costPerMeter ? `₪${((fenceNum / 2) * Number(form.costPerMeter)).toLocaleString()}` : "—"}
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
                 </div>
               )}
             </div>
