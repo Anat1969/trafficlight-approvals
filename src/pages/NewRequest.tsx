@@ -142,13 +142,16 @@ export default function NewRequest() {
           </div>
 
           {isConstruction && (
-            <div className="space-y-4">
-              <h2 className="text-lg font-semibold border-b pb-2">פרטי אתר בנייה</h2>
+            <div className="space-y-6 animate-fade-in">
+              <h2 className="text-xl font-semibold border-b border-border/60 pb-3 flex items-center gap-2">
+                <span className="bg-primary/10 text-primary p-1.5 rounded-md">2</span>
+                פרטי אתר בנייה
+              </h2>
               
-              <Alert className="bg-blue-50/50 text-blue-900 border-blue-200">
-                <Info className="h-4 w-4 text-blue-600" />
-                <AlertTitle className="text-blue-800">הנחיות לשילוט פרויקט / יועצים באתרי בנייה</AlertTitle>
-                <AlertDescription className="text-blue-700/80 mt-2 space-y-2">
+              <Alert className="bg-status-blue-bg text-status-blue border-status-blue-border shadow-soft-sm">
+                <Info className="h-5 w-5" />
+                <AlertTitle className="font-bold text-lg mb-2">הנחיות לשילוט פרויקט / יועצים באתרי בנייה</AlertTitle>
+                <AlertDescription className="mt-2 space-y-2 opacity-90">
                   <ul className="list-disc list-inside space-y-1 pr-4">
                     <li><strong>גודל מותר:</strong> 2x4 מטר (רוחבי). חריגה דורשת אישור ועדת שילוט.</li>
                     <li><strong>גדר מדברת:</strong> גובה 2 מטר. 50% תכנים עירוניים ו-50% תוכן יזמי.</li>
