@@ -225,6 +225,25 @@ export default function NewRequest() {
             </div>
           </div>
 
+          {SIGN_TYPE_GUIDELINES[form.signType] && (
+            <Alert className="bg-accent/50 border-primary/20 shadow-soft-sm animate-fade-in">
+              <BookOpen className="h-5 w-5 text-primary" />
+              <AlertTitle className="font-bold text-lg mb-2 text-primary">
+                הנחיות: {SIGN_TYPE_GUIDELINES[form.signType].title}
+              </AlertTitle>
+              <AlertDescription>
+                <ul className="space-y-1.5 pr-4 mt-2">
+                  {SIGN_TYPE_GUIDELINES[form.signType].guidelines.map((g, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm">
+                      <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                      <span className="leading-relaxed">{g}</span>
+                    </li>
+                  ))}
+                </ul>
+              </AlertDescription>
+            </Alert>
+          )}
+
           {isConstruction && (
             <div className="space-y-6 animate-fade-in">
               <h2 className="text-xl font-semibold border-b border-border/60 pb-3 flex items-center gap-2">
