@@ -25,6 +25,7 @@ const App = () => (
           <Route path="/review" element={<Review />} />
           <Route path="/decision" element={<Decision />} />
           <Route path="/committee" element={<Committee />} />
+          <Route path="/track" element={<TrackRequest />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
