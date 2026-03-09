@@ -16,6 +16,14 @@ import { SIGN_TYPES, REQUIRED_DOCUMENTS } from "@/lib/mockData";
 import { ArrowRight, Info, Upload } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 export default function NewRequest() {
   const navigate = useNavigate();
