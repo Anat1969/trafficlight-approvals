@@ -13,7 +13,8 @@ import {
 } from "@/components/ui/select";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { SIGN_TYPES, REQUIRED_DOCUMENTS, RequestStatus } from "@/lib/mockData";
-import { ArrowRight, Info, Upload, BookOpen } from "lucide-react";
+import { ArrowRight, Info, Upload, CheckSquare } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const SIGN_TYPE_GUIDELINES: Record<string, { title: string; guidelines: string[] }> = {
   "שלט עסק": {
