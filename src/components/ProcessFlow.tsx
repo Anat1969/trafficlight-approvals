@@ -43,8 +43,8 @@ export function ProcessFlow({ onNavigate }: ProcessFlowProps = {}) {
   const handleStepClick = (id: string) => {
     if (id === "new") {
       window.location.href = "/new-request";
-    } else if (onNavigate) {
-      onNavigate(id as any);
+    } else {
+      window.location.href = `/${id}`;
     }
   };
 
