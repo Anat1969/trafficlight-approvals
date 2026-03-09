@@ -61,40 +61,31 @@ export function ProcessFlow({ onNavigate }: ProcessFlowProps = {}) {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-stretch gap-3">
+    <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-stretch gap-0">
       {steps.map((step, i) => (
-        <div key={step.label} className="flex flex-1 items-center gap-2">
+        <>
           <button
+            key={step.id}
             onClick={() => handleStepClick(step.id)}
-            className="group flex w-full flex-col items-center text-center rounded-lg border border-border bg-card p-5 transition-all duration-200 hover:border-border/80 hover:shadow-soft-md focus:outline-none relative overflow-hidden"
+            className="group flex h-full flex-col items-center text-center rounded-lg border border-border bg-card p-5 transition-all duration-200 hover:shadow-soft-md focus:outline-none relative overflow-hidden"
           >
-            {/* Subtle top accent line */}
             <div className={`absolute top-0 left-0 right-0 h-0.5 ${step.topBorder} opacity-60`} />
-
-            {/* Step number */}
             <span className={`absolute top-3 left-3 text-xs font-medium ${step.accentColor} opacity-50`}>
               {step.step}
             </span>
-
-            <div className={`flex h-12 w-12 items-center justify-center rounded-lg ${step.iconBg} transition-transform duration-200 group-hover:scale-105`}>
+            <div className={`flex h-12 w-12 items-center justify-center rounded-lg ${step.iconBg}`}>
               <step.icon className={`h-5 w-5 ${step.accentColor}`} />
             </div>
-            <h4 className="mt-3 text-sm font-semibold text-foreground">
-              {step.label}
-            </h4>
-            <span className="mt-1.5 text-2xs text-muted-foreground">
-              {step.authorized}
-            </span>
-            <p className="mt-2 text-xs leading-relaxed text-muted-foreground/80">
-              {step.description}
-            </p>
+            <h4 className="mt-3 text-sm font-semibold text-foreground">{step.label}</h4>
+            <span className="mt-1.5 text-2xs text-muted-foreground">{step.authorized}</span>
+            <p className="mt-2 text-xs leading-relaxed text-muted-foreground/80">{step.description}</p>
           </button>
           {i < steps.length - 1 && (
-            <div className="hidden flex-shrink-0 md:flex">
+            <div key={`arrow-${i}`} className="hidden md:flex items-center justify-center px-1">
               <ChevronLeft className="h-4 w-4 text-border" />
             </div>
           )}
-        </div>
+        </>
       ))}
     </div>
   );
