@@ -153,8 +153,26 @@ export default function NewRequest() {
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-foreground gradient-text">הגשת בקשה לשילוט</h1>
             <p className="text-muted-foreground mt-1 text-balance">אנא מלא את כל פרטי הבקשה בהתאם להנחיות העירוניות</p>
-          </div>
-        </div>
+            </div>
+
+            {SIGN_TYPE_GUIDELINES[form.signType] && (
+              <Alert className="bg-accent/50 border-primary/20 shadow-soft-sm animate-fade-in">
+                <BookOpen className="h-5 w-5 text-primary" />
+                <AlertTitle className="font-bold text-lg mb-2 text-primary">
+                  הנחיות: {SIGN_TYPE_GUIDELINES[form.signType].title}
+                </AlertTitle>
+                <AlertDescription>
+                  <ul className="space-y-1.5 pr-4 mt-2">
+                    {SIGN_TYPE_GUIDELINES[form.signType].guidelines.map((g, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm">
+                        <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                        <span className="leading-relaxed">{g}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </AlertDescription>
+              </Alert>
+            )}
 
         <div className="card-elevated p-8 space-y-10 animate-fade-in" style={{ animationDelay: "100ms" }}>
           <div className="space-y-6">
