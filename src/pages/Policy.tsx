@@ -8,6 +8,8 @@ import { useRef, useState, useEffect, useCallback, DragEvent, ClipboardEvent } f
 
 export default function Policy() {
   const [images, setImages] = useState<Record<string, string>>({});
+  const [dragOverId, setDragOverId] = useState<string | null>(null);
+  const [focusedId, setFocusedId] = useState<string | null>(null);
   const fileInputRefs = useRef<Record<string, HTMLInputElement | null>>({});
 
   useEffect(() => {
@@ -15,22 +17,50 @@ export default function Policy() {
     if (saved) setImages(JSON.parse(saved));
   }, []);
 
+  const saveImage = useCallback((policyId: string, dataUrl: string) => {
+    setImages(prev => {
+      const newImages = { ...prev, [policyId]: dataUrl };
+      localStorage.setItem("policy-images", JSON.stringify(newImages));
+      return newImages;
+    });
+  }, []);
+
   const handleImageUpload = (policyId: string, file: File) => {
     const reader = new FileReader();
-    reader.onload = (e) => {
-      const newImages = { ...images, [policyId]: e.target?.result as string };
-      setImages(newImages);
-      localStorage.setItem("policy-images", JSON.stringify(newImages));
-    };
+    reader.onload = (e) => saveImage(policyId, e.target?.result as string);
     reader.readAsDataURL(file);
   };
 
   const removeImage = (policyId: string) => {
-    const newImages = { ...images };
-    delete newImages[policyId];
-    setImages(newImages);
-    localStorage.setItem("policy-images", JSON.stringify(newImages));
+    setImages(prev => {
+      const newImages = { ...prev };
+      delete newImages[policyId];
+      localStorage.setItem("policy-images", JSON.stringify(newImages));
+      return newImages;
+    });
   };
+
+  const handleDrop = (policyId: string, e: DragEvent) => {
+    e.preventDefault();
+    setDragOverId(null);
+    const file = e.dataTransfer.files?.[0];
+    if (file && file.type.startsWith("image/")) {
+      handleImageUpload(policyId, file);
+    }
+  };
+
+  const handlePaste = useCallback((policyId: string, e: ClipboardEvent) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    for (const item of Array.from(items)) {
+      if (item.type.startsWith("image/")) {
+        e.preventDefault();
+        const file = item.getAsFile();
+        if (file) handleImageUpload(policyId, file);
+        return;
+      }
+    }
+  }, []);
   const policies = [
     {
       id: "1",
