@@ -231,16 +231,29 @@ export default function Policy() {
                 </div>
                 <div className="md:w-2/3">
                   <CardHeader>
-                    <CardTitle className="text-xl text-primary">{policy.title}</CardTitle>
+                    <CardTitle className="text-2xl text-primary">{policy.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-3">
-                      {policy.guidelines.map((guideline, index) => (
-                        <li key={index} className="flex items-start gap-3 text-sm">
-                          <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
-                          <span className="leading-relaxed">{guideline}</span>
-                        </li>
-                      ))}
+                    <ul className="space-y-4">
+                      {policy.guidelines.map((guideline, index) => {
+                        // Highlight the parameter prefix (e.g., "א.", "ב.", "1)")
+                        const match = guideline.match(/^([א-ת]\.|[0-9]+\))/);
+                        if (match) {
+                          const prefix = match[1];
+                          const rest = guideline.slice(prefix.length);
+                          return (
+                            <li key={index} className="text-base leading-relaxed">
+                              <span className="font-bold text-primary">{prefix}</span>
+                              {rest}
+                            </li>
+                          );
+                        }
+                        return (
+                          <li key={index} className="text-base leading-relaxed">
+                            {guideline}
+                          </li>
+                        );
+                      })}
                     </ul>
                   </CardContent>
                 </div>
