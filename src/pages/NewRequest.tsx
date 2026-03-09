@@ -13,7 +13,71 @@ import {
 } from "@/components/ui/select";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { SIGN_TYPES, REQUIRED_DOCUMENTS, RequestStatus } from "@/lib/mockData";
-import { ArrowRight, Info, Upload } from "lucide-react";
+import { ArrowRight, Info, Upload, BookOpen } from "lucide-react";
+
+const SIGN_TYPE_GUIDELINES: Record<string, { title: string; guidelines: string[] }> = {
+  "שלט עסק": {
+    title: "שילוט בתי עסק, חנויות",
+    guidelines: [
+      "א. מיקום השילוט: יתוכנן במיקום אחיד עבור כל בתי העסק בחזית הבניין ומעל בית העסק.",
+      "ב. השלט ימוקם בגבולות הפתחים המקוריים של בית העסק.",
+      "ג. גובה השלט: הסף התחתון לא יפחת מ-2.5 מטרים.",
+      "ד. תאורה: תאורה תהיה במישור החזית ותופעל כל שעות היממה.",
+      "ה. גוון התאורה: צהוב חם או צבעוני.",
+      "ו. סוג השילוט: אותיות בודדות בלבד.",
+    ],
+  },
+  "שלט חוצות": {
+    title: "שילוט חוצות - כרזות ענק / טוטם",
+    guidelines: [
+      "א. יגלה רגישויות לאיכויות הקיימות בסביבה.",
+      "ב. תורם לשיפור חזות המבנה ו/או אין בהצבתו לפגוע בחזית המבנה.",
+      "ג. לא יפגע במבטים פנורמיים של העיר.",
+      "ד. חזית אטומה בלבד.",
+      "ה. לא יסתיר אלמנטים אדריכליים.",
+      "ו. ללא חריגה מגבולות חזית המבנה.",
+    ],
+  },
+  "שלט אלקטרוני": {
+    title: "שילוט אלקטרוני (בשטח פרטי/ציבורי)",
+    guidelines: [
+      "א. יוצב במגרשים בעלי חזית פעילה הפונים לעורקי תחבורה ראשיים בלבד.",
+      "ב. שילוט אלקטרוני יוצב רק בסביבה מסחרית ויותאם להנחיות חזית המבנה.",
+      "ג. השילוט יותקן במרחק שלא יפחת מ-50 מ' ממבנה מגורים בסביבה מסחרית.",
+    ],
+  },
+  "כרזת ענק": {
+    title: "שילוט חוצות - כרזות ענק / טוטם",
+    guidelines: [
+      "א. יגלה רגישויות לאיכויות הקיימות בסביבה.",
+      "ב. תורם לשיפור חזות המבנה ו/או אין בהצבתו לפגוע בחזית המבנה.",
+      "ג. לא יפגע במבטים פנורמיים של העיר.",
+      "ד. חזית אטומה בלבד.",
+      "ה. לא יסתיר אלמנטים אדריכליים.",
+      "ו. ללא חריגה מגבולות חזית המבנה.",
+    ],
+  },
+  "שלט באתר בנייה": {
+    title: "שילוט באתרי בניה: שלט אתר, גדר מדברת",
+    guidelines: [
+      "1) שלט אתר:",
+      "א. תוכן: שם פרויקט/אתר/יועצים.",
+      "ב. גודל: 4*2.",
+      "ג. חומר: מדבקה שתודבק כשלט אחד כחלק מהגדר המדברת.",
+      "2) גדר מדברת:",
+      "א. תוכן: 50% תכנים עירוניים ו-50% תוכן יזמי.",
+    ],
+  },
+  "שלט במרחב הציבורי": {
+    title: "שלט מספר בית על גבי מבנה (שם ומס' רחוב - התמצאות)",
+    guidelines: [
+      "א. שלט שם רחוב ומספר בית מואר: ימוקם בגובה 3 מטרים ממפלס הכניסה בכל חזית הפונה לרחוב או מרחב ציבורי.",
+      "ב. שלט מס' בית: לוחית אלומיניום בגודל 20X25 ס\"מ, עובי הלוחית 2 מ\"מ.",
+      "ג. פילם מחזיר אור: בצבע כחול יודבק בחזית הלוחית.",
+      "ד. פונט: \"נרקיס בלוק\", עיצוב רגיל, גובה 7 ס\"מ.",
+    ],
+  },
+};
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
 import {
@@ -88,7 +152,7 @@ export default function NewRequest() {
           </Button>
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-foreground gradient-text">הגשת בקשה לשילוט</h1>
-            <p className="text-muted-foreground mt-1 text-balance">אנא מלא את כל פרטי הבקשה בהתאם להנחיות העירוניות</p>
+             <p className="text-muted-foreground mt-1 text-balance">אנא מלא את כל פרטי הבקשה בהתאם להנחיות העירוניות</p>
           </div>
         </div>
 
@@ -160,6 +224,25 @@ export default function NewRequest() {
               </div>
             </div>
           </div>
+
+          {SIGN_TYPE_GUIDELINES[form.signType] && (
+            <Alert className="bg-accent/50 border-primary/20 shadow-soft-sm animate-fade-in">
+              <BookOpen className="h-5 w-5 text-primary" />
+              <AlertTitle className="font-bold text-lg mb-2 text-primary">
+                הנחיות: {SIGN_TYPE_GUIDELINES[form.signType].title}
+              </AlertTitle>
+              <AlertDescription>
+                <ul className="space-y-1.5 pr-4 mt-2">
+                  {SIGN_TYPE_GUIDELINES[form.signType].guidelines.map((g, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm">
+                      <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                      <span className="leading-relaxed">{g}</span>
+                    </li>
+                  ))}
+                </ul>
+              </AlertDescription>
+            </Alert>
+          )}
 
           {isConstruction && (
             <div className="space-y-6 animate-fade-in">
