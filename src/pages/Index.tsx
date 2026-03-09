@@ -3,7 +3,6 @@ import { mockRequests, SignageRequest } from "@/lib/mockData";
 import { StatsCards } from "@/components/StatsCards";
 import { RequestsTable } from "@/components/RequestsTable";
 import { CommitteeView } from "@/components/CommitteeView";
-import { NewRequestDialog } from "@/components/NewRequestDialog";
 import { ProcessFlow } from "@/components/ProcessFlow";
 import { PolicyGuide } from "@/components/PolicyGuide";
 import { Landmark, FileText, Plus, Users, LayoutDashboard, BookOpen } from "lucide-react";
@@ -13,7 +12,6 @@ type Tab = "dashboard" | "committee" | "policy";
 
 const Index = () => {
   const [requests, setRequests] = useState<SignageRequest[]>(mockRequests);
-  const [showNewRequest, setShowNewRequest] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>("dashboard");
 
   const handleUpdateRequest = (id: string, updates: Partial<SignageRequest>) => {
@@ -49,7 +47,7 @@ const Index = () => {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Button onClick={() => setShowNewRequest(true)} className="gap-1.5">
+            <Button onClick={() => window.location.href = '/new-request'} className="gap-1.5">
               <Plus className="h-4 w-4" />
               בקשה חדשה
             </Button>
@@ -125,13 +123,6 @@ const Index = () => {
           </>
         )}
       </main>
-
-      <NewRequestDialog
-        open={showNewRequest}
-        onClose={() => setShowNewRequest(false)}
-        onAdd={handleAddRequest}
-        nextId={nextId}
-      />
     </div>
   );
 };
