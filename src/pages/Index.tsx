@@ -106,7 +106,7 @@ const Index = () => {
                 קטגוריות השילוט, סוגי השלטים, הנחיות עיצוביות ונוהל אישור לכל קטגוריה
               </p>
             </div>
-            <ProcessFlow />
+            <ProcessFlow onNavigate={setActiveTab} />
             <div className="mt-6">
               <PolicyGuide />
             </div>
