@@ -49,7 +49,7 @@ const Index = () => {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Button onClick={() => setShowNewRequest(true)} className="gap-1.5">
+            <Button onClick={() => window.location.href = '/new-request'} className="gap-1.5">
               <Plus className="h-4 w-4" />
               בקשה חדשה
             </Button>
