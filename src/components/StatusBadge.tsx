@@ -20,7 +20,7 @@ export function StatusBadge({ status }: { status: RequestStatus }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold",
+        "inline-flex items-center gap-1.5 px-3 py-1.5 text-xs transition-all duration-200",
         colorClasses[config.color]
       )}
     >
