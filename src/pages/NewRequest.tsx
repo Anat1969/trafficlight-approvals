@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,8 @@ import {
 } from "@/components/ui/select";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { SIGN_TYPES, REQUIRED_DOCUMENTS, RequestStatus } from "@/lib/mockData";
-import { ArrowRight, Info, Upload, BookOpen } from "lucide-react";
+import { ArrowRight, Info, Upload, CheckSquare } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const SIGN_TYPE_GUIDELINES: Record<string, { title: string; guidelines: string[] }> = {
   "שלט עסק": {
@@ -112,6 +113,15 @@ export default function NewRequest() {
     fenceLength: "",
     costPerMeter: "",
   });
+
+  const [checkedGuidelines, setCheckedGuidelines] = useState<Record<string, boolean>>({});
+
+  const currentGuidelines = SIGN_TYPE_GUIDELINES[form.signType]?.guidelines || [];
+  
+  // Reset checkboxes when sign type changes
+  useEffect(() => {
+    setCheckedGuidelines({});
+  }, [form.signType]);
 
   const isConstruction = form.signType === "שלט באתר בנייה";
 
@@ -227,19 +237,42 @@ export default function NewRequest() {
 
           {SIGN_TYPE_GUIDELINES[form.signType] && (
             <Alert className="bg-accent/50 border-primary/20 shadow-soft-sm animate-fade-in">
-              <BookOpen className="h-5 w-5 text-primary" />
+              <CheckSquare className="h-5 w-5 text-primary" />
               <AlertTitle className="font-bold text-lg mb-2 text-primary">
-                הנחיות: {SIGN_TYPE_GUIDELINES[form.signType].title}
+                צ'ק ליסט הנחיות: {SIGN_TYPE_GUIDELINES[form.signType].title}
               </AlertTitle>
               <AlertDescription>
-                <ul className="space-y-1.5 pr-4 mt-2">
-                  {SIGN_TYPE_GUIDELINES[form.signType].guidelines.map((g, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm">
-                      <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
-                      <span className="leading-relaxed">{g}</span>
-                    </li>
-                  ))}
+                <p className="text-xs text-muted-foreground mb-3">אנא אשר שהבקשה עומדת בכל ההנחיות הבאות:</p>
+                <ul className="space-y-3 mt-2">
+                  {currentGuidelines.map((g, i) => {
+                    const checkKey = `${form.signType}-${i}`;
+                    return (
+                      <li key={i} className="flex items-start gap-3 text-sm">
+                        <Checkbox
+                          id={checkKey}
+                          checked={checkedGuidelines[checkKey] || false}
+                          onCheckedChange={(checked) => 
+                            setCheckedGuidelines(prev => ({ ...prev, [checkKey]: !!checked }))
+                          }
+                          className="mt-0.5"
+                        />
+                        <label 
+                          htmlFor={checkKey} 
+                          className={`leading-relaxed cursor-pointer transition-colors ${
+                            checkedGuidelines[checkKey] ? "text-muted-foreground line-through" : ""
+                          }`}
+                        >
+                          {g}
+                        </label>
+                      </li>
+                    );
+                  })}
                 </ul>
+                {currentGuidelines.length > 0 && (
+                  <p className="text-xs mt-4 text-muted-foreground">
+                    סומנו {Object.values(checkedGuidelines).filter(Boolean).length} מתוך {currentGuidelines.length} הנחיות
+                  </p>
+                )}
               </AlertDescription>
             </Alert>
           )}
