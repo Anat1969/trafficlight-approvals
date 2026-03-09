@@ -200,12 +200,19 @@ export default function NewRequest() {
               </div>
 
               {fenceNum > 0 && (
-                <div className="rounded-md border bg-card p-4 mt-4 shadow-sm">
-                  <h3 className="font-semibold text-lg mb-4">חישוב חלוקת גדר מדברת ואגרת שילוט</h3>
+                <div className="card-flat p-6 mt-6 bg-gradient-to-br from-background to-muted/30 border-primary/20">
+                  <h3 className="font-semibold text-lg mb-5 text-primary flex items-center gap-2">
+                    <span className="relative flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-40"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                    </span>
+                    חישוב חלוקת גדר מדברת ואגרת שילוט
+                  </h3>
                   
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
+                  <div className="overflow-hidden rounded-lg border border-border/60 bg-background shadow-soft-sm">
+                    <Table>
+                      <TableHeader className="bg-muted/40">
+                        <TableRow className="hover:bg-transparent">
                         <TableHead className="text-right">סה"כ אורך מבוקש</TableHead>
                         <TableHead className="text-right">תכנים עירוניים (50%)</TableHead>
                         <TableHead className="text-right">תוכן יזמי (50%)</TableHead>
