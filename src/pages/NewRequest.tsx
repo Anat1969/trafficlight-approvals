@@ -231,27 +231,31 @@ export default function NewRequest() {
                             value={form.costPerMeter}
                             onChange={(e) => setForm({ ...form, costPerMeter: e.target.value })}
                             placeholder="הזן תעריף..."
-                            className="w-32"
+                            className="w-32 bg-background font-medium focus-visible:ring-primary/40"
                           />
                         </TableCell>
-                        <TableCell className="font-bold text-lg text-green-600">
+                        <TableCell className="font-bold text-xl text-status-green bg-status-green-bg/30">
                           {form.costPerMeter ? `₪${((fenceNum / 2) * Number(form.costPerMeter)).toLocaleString()}` : "—"}
                         </TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
+                  </div>
                 </div>
               )}
             </div>
           )}
 
-          <div className="space-y-4">
-            <h2 className="text-lg font-semibold border-b pb-2">מסמכים נדרשים</h2>
+          <div className="space-y-6">
+            <h2 className="text-xl font-semibold border-b border-border/60 pb-3 flex items-center gap-2">
+              <span className="bg-primary/10 text-primary p-1.5 rounded-md">{isConstruction ? "3" : "2"}</span>
+              מסמכים נדרשים
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {REQUIRED_DOCUMENTS.map((doc, idx) => (
-                <div key={idx} className="flex items-center justify-between border rounded p-3">
-                  <span className="text-sm font-medium">{doc}</span>
-                  <Button variant="outline" size="sm" className="gap-2">
+                <div key={idx} className="flex items-center justify-between border border-border/60 rounded-xl p-4 bg-muted/10 hover:bg-muted/30 transition-colors shadow-soft-sm">
+                  <span className="text-sm font-medium text-foreground">{doc}</span>
+                  <Button variant="outline" size="sm" className="gap-2 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all">
                     <Upload className="h-4 w-4" />
                     העלה קובץ
                   </Button>
@@ -260,9 +264,13 @@ export default function NewRequest() {
             </div>
           </div>
 
-          <div className="flex justify-end gap-4 pt-4">
-            <Button variant="outline" onClick={() => navigate("/")}>ביטול חזרה</Button>
-            <Button onClick={handleSubmit} className="px-8">שליחת בקשה</Button>
+          <div className="flex justify-end gap-4 pt-6 border-t border-border/60 mt-8">
+            <Button variant="outline" onClick={() => navigate("/")} className="px-6 hover:bg-destructive/10 hover:text-destructive hover:border-destructive/30 transition-colors">
+              ביטול וחזרה
+            </Button>
+            <Button onClick={handleSubmit} className="px-10 btn-primary shadow-soft-md">
+              שליחת בקשה לאישור
+            </Button>
           </div>
         </div>
       </div>
