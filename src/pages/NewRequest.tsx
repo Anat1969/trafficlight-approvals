@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { SIGN_TYPES, REQUIRED_DOCUMENTS } from "@/lib/mockData";
+import { SIGN_TYPES, REQUIRED_DOCUMENTS, RequestStatus } from "@/lib/mockData";
 import { ArrowRight, Info, Upload } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
@@ -24,10 +24,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useRequests } from "@/hooks/useRequests";
 
 export default function NewRequest() {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { addRequest } = useRequests();
   
   const [form, setForm] = useState({
     businessName: "",
