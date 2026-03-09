@@ -2,8 +2,35 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ImagePlus, X } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
 
 export default function Policy() {
+  const [images, setImages] = useState<Record<string, string>>({});
+  const fileInputRefs = useRef<Record<string, HTMLInputElement | null>>({});
+
+  useEffect(() => {
+    const saved = localStorage.getItem("policy-images");
+    if (saved) setImages(JSON.parse(saved));
+  }, []);
+
+  const handleImageUpload = (policyId: string, file: File) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const newImages = { ...images, [policyId]: e.target?.result as string };
+      setImages(newImages);
+      localStorage.setItem("policy-images", JSON.stringify(newImages));
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const removeImage = (policyId: string) => {
+    const newImages = { ...images };
+    delete newImages[policyId];
+    setImages(newImages);
+    localStorage.setItem("policy-images", JSON.stringify(newImages));
+  };
   const policies = [
     {
       id: "1",
