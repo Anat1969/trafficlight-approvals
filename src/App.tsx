@@ -10,6 +10,7 @@ import Review from "./pages/Review";
 import Decision from "./pages/Decision";
 import Committee from "./pages/Committee";
 import TrackRequest from "./pages/TrackRequest";
+import Policy from "./pages/Policy";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/decision" element={<Decision />} />
           <Route path="/committee" element={<Committee />} />
           <Route path="/track" element={<TrackRequest />} />
+          <Route path="/policy" element={<Policy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

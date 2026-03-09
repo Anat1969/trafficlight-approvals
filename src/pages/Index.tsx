@@ -28,6 +28,9 @@ const Index = () => {
             <Button variant="outline" onClick={() => window.location.href = '/track'} className="gap-2 shadow-soft-sm hover:shadow-soft-md transition-all">
               אזור אישי (מעקב)
             </Button>
+            <Button variant="outline" onClick={() => window.location.href = '/policy'} className="gap-2 shadow-soft-sm hover:shadow-soft-md transition-all">
+              מדיניות שילוט
+            </Button>
             <Button onClick={() => window.location.href = '/new-request'} className="gap-2 shadow-soft-md hover:shadow-soft-lg transition-all">
               <Plus className="h-4 w-4" />
               בקשה חדשה
