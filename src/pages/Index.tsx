@@ -124,28 +124,47 @@ const Index = () => {
         )}
 
         {activeTab === "policy" && (
-          <>
-            <div className="mb-8">
+          <div className="space-y-6 animate-fade-in">
+            <div className="rounded-xl border border-border bg-card px-6 py-5 shadow-soft-sm">
               <h2 className="text-2xl font-bold text-foreground">נוהל והנחיות עיצוביות</h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                קטגוריות השילוט, סוגי השלטים, הנחיות עיצוביות ונוהל אישור לכל קטגוריה
-              </p>
+              <p className="mt-1 text-sm text-muted-foreground">קטגוריות השילוט, סוגי השלטים, הנחיות עיצוביות ונוהל אישור לכל קטגוריה</p>
             </div>
-            <ProcessFlow onNavigate={setActiveTab} />
-            <div className="mt-6">
-              <PolicyGuide />
-            </div>
-          </>
+
+            <section className="rounded-xl border border-border bg-card shadow-soft-sm overflow-hidden">
+              <div className="border-b border-border bg-muted/30 px-6 py-3">
+                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">תהליך אישור</h3>
+              </div>
+              <div className="p-6">
+                <ProcessFlow onNavigate={setActiveTab} />
+              </div>
+            </section>
+
+            <section className="rounded-xl border border-border bg-card shadow-soft-sm overflow-hidden">
+              <div className="border-b border-border bg-muted/30 px-6 py-3">
+                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">הנחיות ונהלים</h3>
+              </div>
+              <div className="p-6">
+                <PolicyGuide />
+              </div>
+            </section>
+          </div>
         )}
 
         {activeTab === "committee" && (
-          <>
-            <div className="mb-8">
+          <div className="space-y-6 animate-fade-in">
+            <div className="rounded-xl border border-border bg-card px-6 py-5 shadow-soft-sm">
               <h2 className="text-2xl font-bold text-foreground">בקשות לוועדה</h2>
               <p className="mt-1 text-sm text-muted-foreground">בקשות מאושרות עם מסמכים מלאים - מוכנות לדיון בוועדה</p>
             </div>
-            <CommitteeView requests={requests} />
-          </>
+            <section className="rounded-xl border border-border bg-card shadow-soft-sm overflow-hidden">
+              <div className="border-b border-border bg-muted/30 px-6 py-3">
+                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">רשימת בקשות לדיון</h3>
+              </div>
+              <div className="p-6">
+                <CommitteeView requests={requests} />
+              </div>
+            </section>
+          </div>
         )}
       </main>
     </div>
