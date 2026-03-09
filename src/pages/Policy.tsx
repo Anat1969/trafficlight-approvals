@@ -190,21 +190,11 @@ export default function Policy() {
                   onDrop={(e) => handleDrop(policy.id, e)}
                 >
                   {images[policy.id] ? (
-                    <>
-                      <img 
-                        src={images[policy.id]} 
-                        alt={policy.title}
-                        className="w-full h-full object-contain rounded"
-                      />
-                      <Button
-                        variant="destructive"
-                        size="icon"
-                        className="absolute top-4 left-4 z-10 h-7 w-7"
-                        onClick={() => removeImage(policy.id)}
-                      >
-                        <X className="h-4 w-4" />
-                      </Button>
-                    </>
+                    <img 
+                      src={images[policy.id]} 
+                      alt={policy.title}
+                      className="w-full h-full object-contain rounded"
+                    />
                   ) : (
                     <div className="flex flex-col items-center gap-3 text-muted-foreground text-center">
                       <ImagePlus className="h-12 w-12" />
