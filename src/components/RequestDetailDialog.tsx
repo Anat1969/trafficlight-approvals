@@ -60,6 +60,12 @@ export function RequestDetailDialog({ request, onClose, onUpdate }: Props) {
       notes: "עמד בכל תנאי הבדיקה ואושר.", 
       updatedAt: new Date().toISOString().split("T")[0] 
     });
+    
+    // Simulate sending email
+    toast(`מייל אישור נשלח לכתובת ${request.applicantEmail}`, {
+      description: "בעל העסק עודכן שהבקשה עברה את שלב הבדיקה בהצלחה.",
+    });
+    
     onClose();
   };
 
@@ -76,6 +82,12 @@ export function RequestDetailDialog({ request, onClose, onUpdate }: Props) {
         notes: finalNote,
         updatedAt: new Date().toISOString().split("T")[0],
       });
+
+      // Simulate sending email
+      toast(`מייל דחייה נשלח לכתובת ${request.applicantEmail}`, {
+        description: "בעל העסק עודכן בסיבות הדחייה ובתיקונים הנדרשים.",
+      });
+
       onClose();
     }
   };
