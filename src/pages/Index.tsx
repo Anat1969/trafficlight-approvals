@@ -1,36 +1,14 @@
-import { useState } from "react";
-import { mockRequests, SignageRequest } from "@/lib/mockData";
 import { StatsCards } from "@/components/StatsCards";
 import { RequestsTable } from "@/components/RequestsTable";
-import { CommitteeView } from "@/components/CommitteeView";
 import { ProcessFlow } from "@/components/ProcessFlow";
-import { PolicyGuide } from "@/components/PolicyGuide";
-import { Landmark, FileText, Plus, Users, LayoutDashboard, BookOpen } from "lucide-react";
+import { Landmark, FileText, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-type Tab = "dashboard" | "committee" | "policy";
+import { useRequests } from "@/hooks/useRequests";
 
 const Index = () => {
-  const [requests, setRequests] = useState<SignageRequest[]>(mockRequests);
-  const [activeTab, setActiveTab] = useState<Tab>("dashboard");
+  const { requests, updateRequest, isLoaded } = useRequests();
 
-  const handleUpdateRequest = (id: string, updates: Partial<SignageRequest>) => {
-    setRequests((prev) =>
-      prev.map((r) => (r.id === id ? { ...r, ...updates } : r))
-    );
-  };
-
-  const handleAddRequest = (request: SignageRequest) => {
-    setRequests((prev) => [request, ...prev]);
-  };
-
-  const nextId = requests.length + 1;
-
-  const tabs = [
-    { key: "dashboard" as Tab, label: "לוח בקרה", icon: LayoutDashboard },
-    { key: "policy" as Tab, label: "נוהל והנחיות", icon: BookOpen },
-    { key: "committee" as Tab, label: "ועדה", icon: Users },
-  ];
+  if (!isLoaded) return <div className="p-8 text-center">טוען...</div>;
 
   return (
     <div className="min-h-screen bg-background">
@@ -60,112 +38,46 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Tab Navigation */}
-      <div className="border-b border-border bg-card">
-        <div className="mx-auto flex max-w-7xl gap-1 px-6">
-          {tabs.map((tab) => (
-            <button
-              key={tab.key}
-              onClick={() => setActiveTab(tab.key)}
-              className={`group flex items-center gap-2 border-b-2 px-5 py-4 text-sm font-medium transition-all duration-200 ${
-                activeTab === tab.key
-                  ? "border-primary text-primary"
-                  : "border-transparent text-muted-foreground hover:border-border hover:text-foreground"
-              }`}
-            >
-              <tab.icon className={`h-4 w-4 transition-transform duration-200 ${activeTab === tab.key ? "" : "group-hover:scale-110"}`} />
-              {tab.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
       {/* Content */}
       <main className="mx-auto max-w-7xl px-6 py-8">
-        {activeTab === "dashboard" && (
-          <div className="space-y-6 animate-fade-in">
-            {/* Page title */}
-            <div className="rounded-xl border border-border bg-card px-6 py-5 shadow-soft-sm">
-              <h2 className="text-2xl font-bold text-foreground">לוח בקרה</h2>
-              <p className="mt-1 text-sm text-muted-foreground">סקירה כללית של בקשות שילוט וסטטוס אישורים</p>
-            </div>
-
-            {/* Process Flow section */}
-            <section className="rounded-xl border border-border bg-card shadow-soft-sm overflow-hidden">
-              <div className="border-b border-border bg-muted/30 px-6 py-3">
-                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">תהליך אישור</h3>
-              </div>
-              <div className="p-6">
-                <ProcessFlow onNavigate={setActiveTab} />
-              </div>
-            </section>
-
-            {/* Stats section */}
-            <section className="rounded-xl border border-border bg-card shadow-soft-sm overflow-hidden">
-              <div className="border-b border-border bg-muted/30 px-6 py-3">
-                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">סטטיסטיקות</h3>
-              </div>
-              <div className="p-6">
-                <StatsCards requests={requests} />
-              </div>
-            </section>
-
-            {/* Requests Table section */}
-            <section className="rounded-xl border border-border bg-card shadow-soft-sm overflow-hidden">
-              <div className="border-b border-border bg-muted/30 px-6 py-3 flex items-center justify-between">
-                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">כל הבקשות</h3>
-                <span className="text-xs text-muted-foreground">{requests.length} רשומות</span>
-              </div>
-              <div className="p-6">
-                <RequestsTable requests={requests} onUpdateRequest={handleUpdateRequest} />
-              </div>
-            </section>
+        <div className="space-y-6 animate-fade-in">
+          {/* Page title */}
+          <div className="rounded-xl border border-border bg-card px-6 py-5 shadow-soft-sm">
+            <h2 className="text-2xl font-bold text-foreground">לוח בקרה</h2>
+            <p className="mt-1 text-sm text-muted-foreground">סקירה כללית של בקשות שילוט וסטטוס אישורים</p>
           </div>
-        )}
 
-        {activeTab === "policy" && (
-          <div className="space-y-6 animate-fade-in">
-            <div className="rounded-xl border border-border bg-card px-6 py-5 shadow-soft-sm">
-              <h2 className="text-2xl font-bold text-foreground">נוהל והנחיות עיצוביות</h2>
-              <p className="mt-1 text-sm text-muted-foreground">קטגוריות השילוט, סוגי השלטים, הנחיות עיצוביות ונוהל אישור לכל קטגוריה</p>
+          {/* Process Flow section */}
+          <section className="rounded-xl border border-border bg-card shadow-soft-sm overflow-hidden">
+            <div className="border-b border-border bg-muted/30 px-6 py-3">
+              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">תהליך אישור</h3>
             </div>
-
-            <section className="rounded-xl border border-border bg-card shadow-soft-sm overflow-hidden">
-              <div className="border-b border-border bg-muted/30 px-6 py-3">
-                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">תהליך אישור</h3>
-              </div>
-              <div className="p-6">
-                <ProcessFlow onNavigate={setActiveTab} />
-              </div>
-            </section>
-
-            <section className="rounded-xl border border-border bg-card shadow-soft-sm overflow-hidden">
-              <div className="border-b border-border bg-muted/30 px-6 py-3">
-                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">הנחיות ונהלים</h3>
-              </div>
-              <div className="p-6">
-                <PolicyGuide />
-              </div>
-            </section>
-          </div>
-        )}
-
-        {activeTab === "committee" && (
-          <div className="space-y-6 animate-fade-in">
-            <div className="rounded-xl border border-border bg-card px-6 py-5 shadow-soft-sm">
-              <h2 className="text-2xl font-bold text-foreground">בקשות לוועדה</h2>
-              <p className="mt-1 text-sm text-muted-foreground">בקשות מאושרות עם מסמכים מלאים - מוכנות לדיון בוועדה</p>
+            <div className="p-6">
+              <ProcessFlow />
             </div>
-            <section className="rounded-xl border border-border bg-card shadow-soft-sm overflow-hidden">
-              <div className="border-b border-border bg-muted/30 px-6 py-3">
-                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">רשימת בקשות לדיון</h3>
-              </div>
-              <div className="p-6">
-                <CommitteeView requests={requests} />
-              </div>
-            </section>
-          </div>
-        )}
+          </section>
+
+          {/* Stats section */}
+          <section className="rounded-xl border border-border bg-card shadow-soft-sm overflow-hidden">
+            <div className="border-b border-border bg-muted/30 px-6 py-3">
+              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">סטטיסטיקות</h3>
+            </div>
+            <div className="p-6">
+              <StatsCards requests={requests} />
+            </div>
+          </section>
+
+          {/* Requests Table section */}
+          <section className="rounded-xl border border-border bg-card shadow-soft-sm overflow-hidden">
+            <div className="border-b border-border bg-muted/30 px-6 py-3 flex items-center justify-between">
+              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">כל הבקשות</h3>
+              <span className="text-xs text-muted-foreground">{requests.length} רשומות</span>
+            </div>
+            <div className="p-6">
+              <RequestsTable requests={requests} onUpdateRequest={updateRequest} />
+            </div>
+          </section>
+        </div>
       </main>
     </div>
   );
