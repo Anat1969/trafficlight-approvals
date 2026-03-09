@@ -67,13 +67,13 @@ const Index = () => {
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`flex items-center gap-1.5 border-b-2 px-4 py-3 text-sm font-medium transition-colors ${
+              className={`group flex items-center gap-2 border-b-2 px-5 py-4 text-sm font-medium transition-all duration-200 ${
                 activeTab === tab.key
                   ? "border-primary text-primary"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
+                  : "border-transparent text-muted-foreground hover:border-border hover:text-foreground"
               }`}
             >
-              <tab.icon className="h-4 w-4" />
+              <tab.icon className={`h-4 w-4 transition-transform duration-200 ${activeTab === tab.key ? "" : "group-hover:scale-110"}`} />
               {tab.label}
             </button>
           ))}
