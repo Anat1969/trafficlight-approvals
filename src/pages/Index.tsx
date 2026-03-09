@@ -3,7 +3,6 @@ import { mockRequests, SignageRequest } from "@/lib/mockData";
 import { StatsCards } from "@/components/StatsCards";
 import { RequestsTable } from "@/components/RequestsTable";
 import { CommitteeView } from "@/components/CommitteeView";
-import { NewRequestDialog } from "@/components/NewRequestDialog";
 import { ProcessFlow } from "@/components/ProcessFlow";
 import { PolicyGuide } from "@/components/PolicyGuide";
 import { Landmark, FileText, Plus, Users, LayoutDashboard, BookOpen } from "lucide-react";
