@@ -11,8 +11,7 @@ const Index = () => {
   if (!isLoaded) return <div className="p-8 text-center">טוען...</div>;
 
   return (
-    <div className="min-h-screen bg-background relative">
-      <div className="fixed inset-0 z-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: 'url(/images/policy-grid.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }} />
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80 shadow-soft-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
