@@ -44,6 +44,7 @@ export default function NewRequest() {
     projectName: "",
     consultants: "",
     fenceLength: "",
+    costPerMeter: "",
   });
 
   const isConstruction = form.signType === "שלט באתר בנייה";
