@@ -147,20 +147,48 @@ export default function Policy() {
           {policies.map((policy) => (
             <Card key={policy.id} className="overflow-hidden">
               <div className="md:flex">
-                <div className="md:w-1/3 bg-muted flex items-center justify-center p-6 relative overflow-hidden">
+                <div className="md:w-1/3 bg-muted flex flex-col items-center justify-center p-6 relative overflow-hidden min-h-[200px]">
                   <Badge className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center text-lg rounded-full">
                     {policy.imageNumber}
                   </Badge>
-                  {/* Since we can't easily crop the exact grid dynamically, we display the whole image focused via object-fit or just show a placeholder representing the section */}
-                  <img 
-                    src="/images/policy-grid.png" 
-                    alt={policy.title}
-                    className="w-full h-auto object-contain opacity-80"
-                  />
-                  <div className="absolute inset-0 bg-background/20 backdrop-blur-[2px]"></div>
-                  <div className="absolute inset-0 flex items-center justify-center font-bold text-4xl text-primary drop-shadow-md">
-                    חלק {policy.imageNumber}
-                  </div>
+                  {images[policy.id] ? (
+                    <>
+                      <img 
+                        src={images[policy.id]} 
+                        alt={policy.title}
+                        className="w-full h-full object-contain rounded"
+                      />
+                      <Button
+                        variant="destructive"
+                        size="icon"
+                        className="absolute top-4 left-4 z-10 h-7 w-7"
+                        onClick={() => removeImage(policy.id)}
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </>
+                  ) : (
+                    <div className="flex flex-col items-center gap-3 text-muted-foreground">
+                      <ImagePlus className="h-12 w-12" />
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => fileInputRefs.current[policy.id]?.click()}
+                      >
+                        העלה תמונה
+                      </Button>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        ref={(el) => { fileInputRefs.current[policy.id] = el; }}
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) handleImageUpload(policy.id, file);
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
                 <div className="md:w-2/3">
                   <CardHeader>
