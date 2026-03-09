@@ -35,25 +35,26 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border bg-card shadow-sm">
+      <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80 shadow-soft-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-primary p-2">
+          <div className="flex items-center gap-4">
+            <div className="rounded-xl bg-gradient-to-br from-primary to-primary/80 p-2.5 shadow-glow-primary">
               <Landmark className="h-6 w-6 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-lg font-bold text-foreground">ניהול שילוט עירוני</h1>
-              <p className="text-xs text-muted-foreground">מערכת ניהול בקשות ואישורים</p>
+              <h1 className="text-xl font-bold tracking-tight text-foreground">ניהול שילוט עירוני</h1>
+              <p className="text-sm text-muted-foreground">מערכת ניהול בקשות ואישורים</p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <Button onClick={() => window.location.href = '/new-request'} className="gap-1.5">
+          <div className="flex items-center gap-4">
+            <Button onClick={() => window.location.href = '/new-request'} className="gap-2 shadow-soft-md hover:shadow-soft-lg transition-all">
               <Plus className="h-4 w-4" />
               בקשה חדשה
             </Button>
-            <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-1.5 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 rounded-lg bg-muted/50 px-4 py-2 text-sm text-muted-foreground border border-border/50">
               <FileText className="h-4 w-4" />
-              <span>{requests.length} בקשות</span>
+              <span className="font-medium">{requests.length}</span>
+              <span>בקשות</span>
             </div>
           </div>
         </div>
