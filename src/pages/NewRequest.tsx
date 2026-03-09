@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { SIGN_TYPES, REQUIRED_DOCUMENTS } from "@/lib/mockData";
+import { SIGN_TYPES, REQUIRED_DOCUMENTS, RequestStatus } from "@/lib/mockData";
 import { ArrowRight, Info, Upload } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
@@ -24,10 +24,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useRequests } from "@/hooks/useRequests";
 
 export default function NewRequest() {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { addRequest } = useRequests();
   
   const [form, setForm] = useState({
     businessName: "",
@@ -50,6 +52,24 @@ export default function NewRequest() {
   const isConstruction = form.signType === "שלט באתר בנייה";
 
   const handleSubmit = () => {
+    // Generate a random ID
+    const newId = `SH-${new Date().getFullYear()}-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`;
+    
+    addRequest({
+      id: newId,
+      businessName: form.businessName || "עסק חדש",
+      applicantName: form.applicantName || "מגיש חדש",
+      applicantEmail: form.applicantEmail,
+      applicantPhone: form.applicantPhone,
+      signType: form.signType,
+      location: form.location,
+      status: "new",
+      submittedAt: new Date().toISOString().split('T')[0],
+      updatedAt: new Date().toISOString().split('T')[0],
+      notes: form.notes,
+      documents: REQUIRED_DOCUMENTS.map(doc => ({ name: doc, uploaded: false }))
+    });
+
     toast({
       title: "בקשה נשלחה בהצלחה",
       description: "בקשתך לשילוט נקלטה במערכת.",

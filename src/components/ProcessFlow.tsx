@@ -14,7 +14,7 @@ const steps = [
     color: "bg-status-blue text-primary-foreground hover:bg-status-blue/90",
   },
   {
-    id: "dashboard",
+    id: "review",
     icon: Search,
     label: "בדיקה ובקרה",
     description: "בדיקת מסמכים, אימות מול הנחיות הרשות, ודרישת השלמות או תיקונים.",
@@ -22,7 +22,7 @@ const steps = [
     color: "bg-status-yellow text-primary-foreground hover:bg-status-yellow/90",
   },
   {
-    id: "dashboard",
+    id: "decision",
     icon: CheckCircle2,
     label: "אישור / דחייה",
     description: "החלטה מקצועית על בסיס הבדיקה: אישור הבקשה להמשך או דחייתה עם פירוט.",
@@ -43,8 +43,8 @@ export function ProcessFlow({ onNavigate }: ProcessFlowProps = {}) {
   const handleStepClick = (id: string) => {
     if (id === "new") {
       window.location.href = "/new-request";
-    } else if (onNavigate) {
-      onNavigate(id as any);
+    } else {
+      window.location.href = `/${id}`;
     }
   };
 
