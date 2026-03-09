@@ -83,20 +83,44 @@ const Index = () => {
       {/* Content */}
       <main className="mx-auto max-w-7xl px-6 py-8">
         {activeTab === "dashboard" && (
-          <>
-            <div className="mb-8">
+          <div className="space-y-6 animate-fade-in">
+            {/* Page title */}
+            <div className="rounded-xl border border-border bg-card px-6 py-5 shadow-soft-sm">
               <h2 className="text-2xl font-bold text-foreground">לוח בקרה</h2>
               <p className="mt-1 text-sm text-muted-foreground">סקירה כללית של בקשות שילוט וסטטוס אישורים</p>
             </div>
-            <div className="space-y-6">
-              <ProcessFlow onNavigate={setActiveTab} />
-              <StatsCards requests={requests} />
-              <div>
-                <h3 className="mb-3 text-lg font-semibold text-foreground">כל הבקשות</h3>
+
+            {/* Process Flow section */}
+            <section className="rounded-xl border border-border bg-card shadow-soft-sm overflow-hidden">
+              <div className="border-b border-border bg-muted/30 px-6 py-3">
+                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">תהליך אישור</h3>
+              </div>
+              <div className="p-6">
+                <ProcessFlow onNavigate={setActiveTab} />
+              </div>
+            </section>
+
+            {/* Stats section */}
+            <section className="rounded-xl border border-border bg-card shadow-soft-sm overflow-hidden">
+              <div className="border-b border-border bg-muted/30 px-6 py-3">
+                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">סטטיסטיקות</h3>
+              </div>
+              <div className="p-6">
+                <StatsCards requests={requests} />
+              </div>
+            </section>
+
+            {/* Requests Table section */}
+            <section className="rounded-xl border border-border bg-card shadow-soft-sm overflow-hidden">
+              <div className="border-b border-border bg-muted/30 px-6 py-3 flex items-center justify-between">
+                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">כל הבקשות</h3>
+                <span className="text-xs text-muted-foreground">{requests.length} רשומות</span>
+              </div>
+              <div className="p-6">
                 <RequestsTable requests={requests} onUpdateRequest={handleUpdateRequest} />
               </div>
-            </div>
-          </>
+            </section>
+          </div>
         )}
 
         {activeTab === "policy" && (
