@@ -6,84 +6,141 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 30% 15%;
+    /* Professional color palette - Clean & Modern */
+    --background: 220 14% 96%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 30% 15%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 30% 15%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 215 60% 32%;
+    /* Primary - Deep blue for trust & professionalism */
+    --primary: 217 91% 35%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 215 25% 90%;
-    --secondary-foreground: 215 60% 25%;
+    /* Secondary - Soft gray-blue */
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 220 15% 93%;
-    --muted-foreground: 220 10% 50%;
+    /* Muted - Subtle backgrounds */
+    --muted: 220 14% 92%;
+    --muted-foreground: 220 9% 46%;
 
-    --accent: 215 40% 95%;
-    --accent-foreground: 215 60% 25%;
+    /* Accent - Light blue tint */
+    --accent: 214 95% 93%;
+    --accent-foreground: 217 91% 35%;
 
-    --destructive: 0 72% 51%;
+    /* Destructive - Refined red */
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 88%;
-    --input: 220 15% 88%;
-    --ring: 215 60% 32%;
+    /* Borders & Inputs */
+    --border: 214 32% 88%;
+    --input: 214 32% 88%;
+    --ring: 217 91% 35%;
 
-    --radius: 0.625rem;
+    --radius: 0.75rem;
 
-    /* Traffic light system */
-    --status-green: 142 60% 42%;
-    --status-green-bg: 142 60% 95%;
-    --status-yellow: 40 90% 50%;
-    --status-yellow-bg: 40 90% 95%;
-    --status-red: 0 72% 51%;
-    --status-red-bg: 0 72% 95%;
-    --status-blue: 215 60% 50%;
-    --status-blue-bg: 215 60% 95%;
+    /* Traffic light system - Refined colors */
+    --status-green: 142 71% 45%;
+    --status-green-bg: 142 76% 96%;
+    --status-green-border: 142 55% 80%;
+    
+    --status-yellow: 38 92% 50%;
+    --status-yellow-bg: 48 96% 95%;
+    --status-yellow-border: 43 88% 70%;
+    
+    --status-red: 0 84% 60%;
+    --status-red-bg: 0 86% 97%;
+    --status-red-border: 0 72% 82%;
+    
+    --status-blue: 217 91% 60%;
+    --status-blue-bg: 214 95% 96%;
+    --status-blue-border: 214 70% 82%;
 
-    --sidebar-background: 215 60% 18%;
-    --sidebar-foreground: 215 20% 90%;
-    --sidebar-primary: 215 60% 65%;
+    /* Sidebar - Professional dark */
+    --sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 217 91% 65%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 50% 25%;
-    --sidebar-accent-foreground: 215 20% 90%;
-    --sidebar-border: 215 40% 25%;
-    --sidebar-ring: 215 60% 65%;
+    --sidebar-accent: 220 30% 18%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 220 25% 20%;
+    --sidebar-ring: 217 91% 65%;
+
+    /* Custom shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+
+    /* Success color */
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+
+    /* Warning color */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    /* Info color */
+    --info: 217 91% 60%;
+    --info-foreground: 0 0% 100%;
   }
 
   .dark {
-    --background: 220 25% 10%;
-    --foreground: 220 10% 92%;
-    --card: 220 25% 13%;
-    --card-foreground: 220 10% 92%;
-    --popover: 220 25% 13%;
-    --popover-foreground: 220 10% 92%;
-    --primary: 215 60% 55%;
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+    --card: 222 47% 9%;
+    --card-foreground: 210 40% 96%;
+    --popover: 222 47% 9%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 215 25% 20%;
-    --secondary-foreground: 215 20% 85%;
-    --muted: 220 20% 18%;
-    --muted-foreground: 220 10% 55%;
-    --accent: 215 30% 20%;
-    --accent-foreground: 215 20% 85%;
-    --destructive: 0 62% 30.6%;
+    --secondary: 217 32% 17%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 217 32% 12%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 217 32% 15%;
+    --accent-foreground: 210 40% 96%;
+    --destructive: 0 62% 50%;
     --destructive-foreground: 210 40% 98%;
-    --border: 220 20% 22%;
-    --input: 220 20% 22%;
-    --ring: 215 60% 55%;
-    --sidebar-background: 220 30% 8%;
-    --sidebar-foreground: 220 10% 85%;
-    --sidebar-primary: 215 60% 55%;
+    --border: 217 32% 18%;
+    --input: 217 32% 18%;
+    --ring: 217 91% 60%;
+    
+    --status-green: 142 71% 50%;
+    --status-green-bg: 142 50% 12%;
+    --status-green-border: 142 40% 25%;
+    
+    --status-yellow: 38 92% 55%;
+    --status-yellow-bg: 38 60% 12%;
+    --status-yellow-border: 38 50% 25%;
+    
+    --status-red: 0 84% 60%;
+    --status-red-bg: 0 60% 12%;
+    --status-red-border: 0 50% 25%;
+    
+    --status-blue: 217 91% 65%;
+    --status-blue-bg: 217 60% 12%;
+    --status-blue-border: 217 50% 25%;
+
+    --sidebar-background: 222 50% 5%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 217 91% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 25% 15%;
-    --sidebar-accent-foreground: 220 10% 85%;
-    --sidebar-border: 220 20% 18%;
-    --sidebar-ring: 215 60% 55%;
+    --sidebar-accent: 222 40% 12%;
+    --sidebar-accent-foreground: 210 40% 90%;
+    --sidebar-border: 222 35% 15%;
+    --sidebar-ring: 217 91% 60%;
+
+    --success: 142 71% 50%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 55%;
+    --warning-foreground: 0 0% 100%;
+    --info: 217 91% 65%;
+    --info-foreground: 0 0% 100%;
   }
 }
 
@@ -94,9 +151,114 @@
 
   html {
     direction: rtl;
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-background text-foreground font-heebo;
+    @apply bg-background text-foreground font-heebo antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Typography Scale */
+  h1 {
+    @apply text-3xl font-bold tracking-tight text-foreground lg:text-4xl;
+  }
+  
+  h2 {
+    @apply text-2xl font-semibold tracking-tight text-foreground;
+  }
+  
+  h3 {
+    @apply text-xl font-semibold text-foreground;
+  }
+  
+  h4 {
+    @apply text-lg font-medium text-foreground;
+  }
+
+  /* Focus styles */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer components {
+  /* Card elevation system */
+  .card-elevated {
+    @apply bg-card rounded-xl border border-border shadow-md transition-shadow duration-200 hover:shadow-lg;
+  }
+  
+  .card-flat {
+    @apply bg-card rounded-lg border border-border;
+  }
+
+  /* Status badges */
+  .badge-success {
+    @apply bg-status-green-bg text-status-green border border-status-green-border;
+  }
+  
+  .badge-warning {
+    @apply bg-status-yellow-bg text-status-yellow border border-status-yellow-border;
+  }
+  
+  .badge-error {
+    @apply bg-status-red-bg text-status-red border border-status-red-border;
+  }
+  
+  .badge-info {
+    @apply bg-status-blue-bg text-status-blue border border-status-blue-border;
+  }
+
+  /* Professional button styles */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 active:scale-[0.98] transition-all duration-150;
+  }
+
+  /* Interactive cards */
+  .interactive-card {
+    @apply bg-card rounded-xl border border-border p-6 shadow-sm transition-all duration-200 hover:border-primary/30 hover:shadow-md cursor-pointer;
+  }
+
+  /* Table styling */
+  .table-professional {
+    @apply w-full text-sm;
+  }
+  
+  .table-professional th {
+    @apply bg-muted/50 font-semibold text-muted-foreground px-4 py-3 text-right;
+  }
+  
+  .table-professional td {
+    @apply px-4 py-3 border-b border-border;
+  }
+  
+  .table-professional tr:hover td {
+    @apply bg-muted/30;
+  }
+
+  /* Form field styling */
+  .form-field {
+    @apply space-y-2;
+  }
+  
+  .form-label {
+    @apply text-sm font-medium text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Smooth transitions */
+  .transition-smooth {
+    @apply transition-all duration-200 ease-out;
+  }
+
+  /* Text balance for better readability */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-l from-primary to-primary/70 bg-clip-text text-transparent;
   }
 }

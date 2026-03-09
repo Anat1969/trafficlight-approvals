@@ -42,14 +42,14 @@ export function StatsCards({ requests }: StatsCardsProps) {
       {stats.map((stat) => (
         <div
           key={stat.label}
-          className="rounded-xl border border-border bg-card p-5 shadow-sm transition-shadow hover:shadow-md"
+          className="card-elevated p-6 animate-fade-in transition-all duration-300 hover:-translate-y-1"
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-muted-foreground">{stat.label}</p>
-              <p className="mt-1 text-3xl font-bold text-card-foreground">{stat.value}</p>
+              <p className="text-sm font-medium text-muted-foreground mb-1">{stat.label}</p>
+              <p className="text-3xl font-bold tracking-tight text-foreground">{stat.value}</p>
             </div>
-            <div className={`rounded-xl p-3 ${stat.bgClass}`}>
+            <div className={`rounded-xl p-3.5 shadow-inner-soft border border-white/50 ${stat.bgClass}`}>
               <stat.icon className={`h-6 w-6 ${stat.iconClass}`} />
             </div>
           </div>

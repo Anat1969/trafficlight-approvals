@@ -62,19 +62,22 @@ export default function NewRequest() {
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="mx-auto max-w-4xl space-y-6">
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" onClick={() => navigate("/")}>
-            <ArrowRight className="h-4 w-4" />
+        <div className="flex items-center gap-4 animate-fade-in">
+          <Button variant="ghost" size="icon" onClick={() => navigate("/")} className="hover:bg-primary/10 hover:text-primary transition-colors">
+            <ArrowRight className="h-5 w-5" />
           </Button>
           <div>
-            <h1 className="text-2xl font-bold text-foreground">הגשת בקשה לשילוט</h1>
-            <p className="text-muted-foreground">אנא מלא את כל פרטי הבקשה בהתאם להנחיות</p>
+            <h1 className="text-3xl font-bold tracking-tight text-foreground gradient-text">הגשת בקשה לשילוט</h1>
+            <p className="text-muted-foreground mt-1 text-balance">אנא מלא את כל פרטי הבקשה בהתאם להנחיות העירוניות</p>
           </div>
         </div>
 
-        <div className="rounded-lg border bg-card p-6 shadow-sm space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-lg font-semibold border-b pb-2">פרטים כלליים</h2>
+        <div className="card-elevated p-8 space-y-10 animate-fade-in" style={{ animationDelay: "100ms" }}>
+          <div className="space-y-6">
+            <h2 className="text-xl font-semibold border-b border-border/60 pb-3 flex items-center gap-2">
+              <span className="bg-primary/10 text-primary p-1.5 rounded-md">1</span>
+              פרטים כלליים
+            </h2>
             
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
@@ -139,13 +142,16 @@ export default function NewRequest() {
           </div>
 
           {isConstruction && (
-            <div className="space-y-4">
-              <h2 className="text-lg font-semibold border-b pb-2">פרטי אתר בנייה</h2>
+            <div className="space-y-6 animate-fade-in">
+              <h2 className="text-xl font-semibold border-b border-border/60 pb-3 flex items-center gap-2">
+                <span className="bg-primary/10 text-primary p-1.5 rounded-md">2</span>
+                פרטי אתר בנייה
+              </h2>
               
-              <Alert className="bg-blue-50/50 text-blue-900 border-blue-200">
-                <Info className="h-4 w-4 text-blue-600" />
-                <AlertTitle className="text-blue-800">הנחיות לשילוט פרויקט / יועצים באתרי בנייה</AlertTitle>
-                <AlertDescription className="text-blue-700/80 mt-2 space-y-2">
+              <Alert className="bg-status-blue-bg text-status-blue border-status-blue-border shadow-soft-sm">
+                <Info className="h-5 w-5" />
+                <AlertTitle className="font-bold text-lg mb-2">הנחיות לשילוט פרויקט / יועצים באתרי בנייה</AlertTitle>
+                <AlertDescription className="mt-2 space-y-2 opacity-90">
                   <ul className="list-disc list-inside space-y-1 pr-4">
                     <li><strong>גודל מותר:</strong> 2x4 מטר (רוחבי). חריגה דורשת אישור ועדת שילוט.</li>
                     <li><strong>גדר מדברת:</strong> גובה 2 מטר. 50% תכנים עירוניים ו-50% תוכן יזמי.</li>
@@ -194,12 +200,19 @@ export default function NewRequest() {
               </div>
 
               {fenceNum > 0 && (
-                <div className="rounded-md border bg-card p-4 mt-4 shadow-sm">
-                  <h3 className="font-semibold text-lg mb-4">חישוב חלוקת גדר מדברת ואגרת שילוט</h3>
+                <div className="card-flat p-6 mt-6 bg-gradient-to-br from-background to-muted/30 border-primary/20">
+                  <h3 className="font-semibold text-lg mb-5 text-primary flex items-center gap-2">
+                    <span className="relative flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-40"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                    </span>
+                    חישוב חלוקת גדר מדברת ואגרת שילוט
+                  </h3>
                   
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
+                  <div className="overflow-hidden rounded-lg border border-border/60 bg-background shadow-soft-sm">
+                    <Table>
+                      <TableHeader className="bg-muted/40">
+                        <TableRow className="hover:bg-transparent">
                         <TableHead className="text-right">סה"כ אורך מבוקש</TableHead>
                         <TableHead className="text-right">תכנים עירוניים (50%)</TableHead>
                         <TableHead className="text-right">תוכן יזמי (50%)</TableHead>
@@ -218,27 +231,31 @@ export default function NewRequest() {
                             value={form.costPerMeter}
                             onChange={(e) => setForm({ ...form, costPerMeter: e.target.value })}
                             placeholder="הזן תעריף..."
-                            className="w-32"
+                            className="w-32 bg-background font-medium focus-visible:ring-primary/40"
                           />
                         </TableCell>
-                        <TableCell className="font-bold text-lg text-green-600">
+                        <TableCell className="font-bold text-xl text-status-green bg-status-green-bg/30">
                           {form.costPerMeter ? `₪${((fenceNum / 2) * Number(form.costPerMeter)).toLocaleString()}` : "—"}
                         </TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
+                  </div>
                 </div>
               )}
             </div>
           )}
 
-          <div className="space-y-4">
-            <h2 className="text-lg font-semibold border-b pb-2">מסמכים נדרשים</h2>
+          <div className="space-y-6">
+            <h2 className="text-xl font-semibold border-b border-border/60 pb-3 flex items-center gap-2">
+              <span className="bg-primary/10 text-primary p-1.5 rounded-md">{isConstruction ? "3" : "2"}</span>
+              מסמכים נדרשים
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {REQUIRED_DOCUMENTS.map((doc, idx) => (
-                <div key={idx} className="flex items-center justify-between border rounded p-3">
-                  <span className="text-sm font-medium">{doc}</span>
-                  <Button variant="outline" size="sm" className="gap-2">
+                <div key={idx} className="flex items-center justify-between border border-border/60 rounded-xl p-4 bg-muted/10 hover:bg-muted/30 transition-colors shadow-soft-sm">
+                  <span className="text-sm font-medium text-foreground">{doc}</span>
+                  <Button variant="outline" size="sm" className="gap-2 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all">
                     <Upload className="h-4 w-4" />
                     העלה קובץ
                   </Button>
@@ -247,9 +264,13 @@ export default function NewRequest() {
             </div>
           </div>
 
-          <div className="flex justify-end gap-4 pt-4">
-            <Button variant="outline" onClick={() => navigate("/")}>ביטול חזרה</Button>
-            <Button onClick={handleSubmit} className="px-8">שליחת בקשה</Button>
+          <div className="flex justify-end gap-4 pt-6 border-t border-border/60 mt-8">
+            <Button variant="outline" onClick={() => navigate("/")} className="px-6 hover:bg-destructive/10 hover:text-destructive hover:border-destructive/30 transition-colors">
+              ביטול וחזרה
+            </Button>
+            <Button onClick={handleSubmit} className="px-10 btn-primary shadow-soft-md">
+              שליחת בקשה לאישור
+            </Button>
           </div>
         </div>
       </div>

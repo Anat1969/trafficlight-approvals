@@ -2,10 +2,10 @@ import { RequestStatus, STATUS_CONFIG } from "@/lib/mockData";
 import { cn } from "@/lib/utils";
 
 const colorClasses = {
-  green: "bg-status-green-bg text-status-green border-status-green/20",
-  yellow: "bg-status-yellow-bg text-status-yellow border-status-yellow/20",
-  red: "bg-status-red-bg text-status-red border-status-red/20",
-  blue: "bg-status-blue-bg text-status-blue border-status-blue/20",
+  green: "badge-success",
+  yellow: "badge-warning",
+  red: "badge-error",
+  blue: "badge-info",
 };
 
 const dotClasses = {
@@ -20,7 +20,7 @@ export function StatusBadge({ status }: { status: RequestStatus }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold",
+        "inline-flex items-center gap-1.5 px-3 py-1.5 text-xs transition-all duration-200",
         colorClasses[config.color]
       )}
     >
