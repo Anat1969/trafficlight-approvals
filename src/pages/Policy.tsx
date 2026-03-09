@@ -225,19 +225,46 @@ export default function Policy() {
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-4">
-                      {policy.guidelines.map((guideline, index) => {
-                        // Highlight the parameter prefix (e.g., "א.", "ב.", "1)")
-                        const match = guideline.match(/^([א-ת]\.|[0-9]+\))/);
-                        if (match) {
-                          const prefix = match[1];
-                          const rest = guideline.slice(prefix.length);
+                    {policy.guidelines.map((guideline, index) => {
+                        // Split by ":" to highlight parameter name
+                        const colonIndex = guideline.indexOf(":");
+                        const prefixMatch = guideline.match(/^([א-ת]\.|[0-9]+\))\s*/);
+                        
+                        if (prefixMatch && colonIndex > prefixMatch[0].length) {
+                          const prefix = prefixMatch[1];
+                          const paramName = guideline.slice(prefixMatch[0].length, colonIndex + 1);
+                          const rest = guideline.slice(colonIndex + 1);
                           return (
                             <li key={index} className="text-base leading-relaxed">
-                              <span className="font-bold text-primary">{prefix}</span>
+                              <span className="font-bold text-primary">{prefix} </span>
+                              <span className="font-bold text-lg">{paramName}</span>
                               {rest}
                             </li>
                           );
                         }
+                        
+                        if (prefixMatch) {
+                          const prefix = prefixMatch[1];
+                          const rest = guideline.slice(prefixMatch[0].length);
+                          return (
+                            <li key={index} className="text-base leading-relaxed">
+                              <span className="font-bold text-primary">{prefix} </span>
+                              {rest}
+                            </li>
+                          );
+                        }
+
+                        if (colonIndex > 0) {
+                          const paramName = guideline.slice(0, colonIndex + 1);
+                          const rest = guideline.slice(colonIndex + 1);
+                          return (
+                            <li key={index} className="text-base leading-relaxed">
+                              <span className="font-bold text-lg">{paramName}</span>
+                              {rest}
+                            </li>
+                          );
+                        }
+
                         return (
                           <li key={index} className="text-base leading-relaxed">
                             {guideline}
