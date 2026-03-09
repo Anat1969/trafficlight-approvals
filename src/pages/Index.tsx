@@ -88,7 +88,7 @@ const Index = () => {
               <p className="mt-1 text-sm text-muted-foreground">סקירה כללית של בקשות שילוט וסטטוס אישורים</p>
             </div>
             <div className="space-y-6">
-              <ProcessFlow />
+              <ProcessFlow onNavigate={setActiveTab} />
               <StatsCards requests={requests} />
               <div>
                 <h3 className="mb-3 text-lg font-semibold text-foreground">כל הבקשות</h3>
