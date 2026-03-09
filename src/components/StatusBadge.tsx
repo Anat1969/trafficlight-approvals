@@ -2,10 +2,10 @@ import { RequestStatus, STATUS_CONFIG } from "@/lib/mockData";
 import { cn } from "@/lib/utils";
 
 const colorClasses = {
-  green: "bg-status-green-bg text-status-green border-status-green/20",
-  yellow: "bg-status-yellow-bg text-status-yellow border-status-yellow/20",
-  red: "bg-status-red-bg text-status-red border-status-red/20",
-  blue: "bg-status-blue-bg text-status-blue border-status-blue/20",
+  green: "badge-success",
+  yellow: "badge-warning",
+  red: "badge-error",
+  blue: "badge-info",
 };
 
 const dotClasses = {
