@@ -12,7 +12,6 @@ type Tab = "dashboard" | "committee" | "policy";
 
 const Index = () => {
   const [requests, setRequests] = useState<SignageRequest[]>(mockRequests);
-  const [showNewRequest, setShowNewRequest] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>("dashboard");
 
   const handleUpdateRequest = (id: string, updates: Partial<SignageRequest>) => {
