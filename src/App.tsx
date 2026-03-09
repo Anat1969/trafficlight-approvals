@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import Review from "./pages/Review";
 import Decision from "./pages/Decision";
 import Committee from "./pages/Committee";
+import TrackRequest from "./pages/TrackRequest";
 
 const queryClient = new QueryClient();
 
