@@ -114,6 +114,15 @@ export default function NewRequest() {
     costPerMeter: "",
   });
 
+  const [checkedGuidelines, setCheckedGuidelines] = useState<Record<string, boolean>>({});
+
+  const currentGuidelines = SIGN_TYPE_GUIDELINES[form.signType]?.guidelines || [];
+  
+  // Reset checkboxes when sign type changes
+  useEffect(() => {
+    setCheckedGuidelines({});
+  }, [form.signType]);
+
   const isConstruction = form.signType === "שלט באתר בנייה";
 
   const handleSubmit = () => {
