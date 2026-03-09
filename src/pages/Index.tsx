@@ -123,13 +123,6 @@ const Index = () => {
           </>
         )}
       </main>
-
-      <NewRequestDialog
-        open={showNewRequest}
-        onClose={() => setShowNewRequest(false)}
-        onAdd={handleAddRequest}
-        nextId={nextId}
-      />
     </div>
   );
 };
