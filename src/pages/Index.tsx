@@ -1,73 +1,63 @@
 import { StatsCards } from "@/components/StatsCards";
 import { RequestsTable } from "@/components/RequestsTable";
 import { ProcessFlow } from "@/components/ProcessFlow";
-import { Landmark, FileText, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRequests } from "@/hooks/useRequests";
 
 const Index = () => {
   const { requests, updateRequest, isLoaded } = useRequests();
 
-  if (!isLoaded) return <div className="p-8 text-center">טוען...</div>;
+  if (!isLoaded) return <div className="p-8 text-center text-muted-foreground">טוען...</div>;
 
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
-          <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-primary p-2">
-              <Landmark className="h-5 w-5 text-primary-foreground" />
-            </div>
-            <div>
-              <h1 className="text-base font-semibold text-foreground">ניהול שילוט עירוני</h1>
-              <p className="text-xs text-muted-foreground">מערכת ניהול בקשות ואישורים</p>
-            </div>
+      <header className="border-b border-border bg-card">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <div>
+            <h1 className="text-sm font-semibold tracking-wide text-foreground">ניהול שילוט עירוני</h1>
+            <p className="text-[10px] text-muted-foreground tracking-wider mt-0.5">מערכת ניהול בקשות ואישורים</p>
           </div>
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm" onClick={() => window.location.href = '/track'}>
+          <div className="flex items-center gap-6">
+            <button onClick={() => window.location.href = '/track'} className="text-[11px] text-muted-foreground hover:text-foreground transition-colors">
               אזור אישי
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => window.location.href = '/policy'}>
+            </button>
+            <button onClick={() => window.location.href = '/policy'} className="text-[11px] text-muted-foreground hover:text-foreground transition-colors">
               מדיניות שילוט
-            </Button>
-            <Button size="sm" onClick={() => window.location.href = '/new-request'} className="gap-1.5">
-              <Plus className="h-3.5 w-3.5" />
+            </button>
+            <Button size="sm" onClick={() => window.location.href = '/new-request'} className="h-7 px-3 text-[11px] rounded-sm gap-1">
+              <Plus className="h-3 w-3" />
               בקשה חדשה
             </Button>
-            <div className="flex items-center gap-1.5 rounded-md bg-muted px-3 py-1.5 text-xs text-muted-foreground">
-              <FileText className="h-3.5 w-3.5" />
-              <span className="font-medium">{requests.length}</span>
-              <span>בקשות</span>
-            </div>
           </div>
         </div>
       </header>
 
       {/* Content */}
-      <main className="mx-auto max-w-7xl px-6 py-6">
-        <div className="space-y-5">
+      <main className="mx-auto max-w-6xl px-6 py-8">
+        <div className="space-y-8">
           {/* Stats */}
           <StatsCards requests={requests} />
 
           {/* Process Flow */}
-          <section className="rounded-lg border border-border bg-card overflow-hidden">
-            <div className="border-b border-border px-5 py-2.5">
-              <h3 className="text-xs font-medium text-muted-foreground">תהליך אישור</h3>
-            </div>
-            <div className="p-5">
+          <section>
+            <h3 className="text-[10px] font-medium text-muted-foreground tracking-widest uppercase mb-3">תהליך אישור</h3>
+            <div className="rounded-sm border border-border overflow-hidden">
               <ProcessFlow />
             </div>
           </section>
 
           {/* Requests Table */}
-          <section className="rounded-lg border border-border bg-card overflow-hidden">
-            <div className="border-b border-border px-5 py-2.5 flex items-center justify-between">
-              <h3 className="text-xs font-medium text-muted-foreground">כל הבקשות</h3>
-              <span className="text-xs text-muted-foreground/60">{requests.length} רשומות</span>
+          <section>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-[10px] font-medium text-muted-foreground tracking-widest uppercase">כל הבקשות</h3>
+              <span className="text-[10px] text-muted-foreground/50 font-mono">{requests.length}</span>
             </div>
-            <div className="p-5">
-              <RequestsTable requests={requests} onUpdateRequest={updateRequest} />
+            <div className="rounded-sm border border-border bg-card overflow-hidden">
+              <div className="p-5">
+                <RequestsTable requests={requests} onUpdateRequest={updateRequest} />
+              </div>
             </div>
           </section>
         </div>
