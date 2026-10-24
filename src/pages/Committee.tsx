@@ -3,6 +3,7 @@ import { CommitteeView } from "@/components/CommitteeView";
 import { Landmark, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import AIMenu from "@/components/AIMenu";
 
 const CommitteePage = () => {
   const { requests, isLoaded } = useRequests();
@@ -26,6 +27,7 @@ const CommitteePage = () => {
               <p className="text-sm text-muted-foreground">דיון מקצועי בחריגים ואישור סופי</p>
             </div>
           </div>
+          <AIMenu />
         </div>
       </header>
 

@@ -4,6 +4,7 @@ import { ProcessFlow } from "@/components/ProcessFlow";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRequests } from "@/hooks/useRequests";
+import AIMenu from "@/components/AIMenu";
 
 const Index = () => {
   const { requests, updateRequest, isLoaded } = useRequests();
@@ -30,6 +31,7 @@ const Index = () => {
               <Plus className="h-3 w-3" />
               בקשה חדשה
             </Button>
+            <AIMenu />
           </div>
         </div>
       </header>

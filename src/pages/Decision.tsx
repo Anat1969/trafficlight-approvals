@@ -3,6 +3,7 @@ import { RequestsTable } from "@/components/RequestsTable";
 import { Landmark, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import AIMenu from "@/components/AIMenu";
 
 const Decision = () => {
   const { requests, updateRequest, isLoaded } = useRequests();
@@ -29,6 +30,7 @@ const Decision = () => {
               <p className="text-sm text-muted-foreground">החלטה מקצועית על בסיס הבדיקה</p>
             </div>
           </div>
+          <AIMenu />
         </div>
       </header>
 

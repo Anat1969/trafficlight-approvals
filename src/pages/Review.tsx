@@ -3,6 +3,7 @@ import { RequestsTable } from "@/components/RequestsTable";
 import { Landmark, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import AIMenu from "@/components/AIMenu";
 
 const Review = () => {
   const { requests, updateRequest, isLoaded } = useRequests();
@@ -29,6 +30,7 @@ const Review = () => {
               <p className="text-sm text-muted-foreground">בדיקת מסמכים ואימות מול הנחיות הרשות</p>
             </div>
           </div>
+          <AIMenu />
         </div>
       </header>
 

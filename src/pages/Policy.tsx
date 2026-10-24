@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ImagePlus, X } from "lucide-react";
 import { useRef, useState, useEffect, useCallback, DragEvent, ClipboardEvent } from "react";
+import AIMenu from "@/components/AIMenu";
 
 export default function Policy() {
   const [images, setImages] = useState<Record<string, string>>({});
@@ -153,15 +154,18 @@ export default function Policy() {
       <header className="border-b bg-card">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <h1 className="text-2xl font-bold">מערכת רישוי שילוט</h1>
-          <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <Link to="/" className={navigationMenuTriggerStyle()}>
-                  חזרה לדף הבית
-                </Link>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+          <div className="flex items-center gap-2">
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <Link to="/" className={navigationMenuTriggerStyle()}>
+                    חזרה לדף הבית
+                  </Link>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+            <AIMenu />
+          </div>
         </div>
       </header>
 
