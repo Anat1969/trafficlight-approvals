@@ -90,6 +90,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useRequests } from "@/hooks/useRequests";
+import AIMenu from "@/components/AIMenu";
 
 export default function NewRequest() {
   const navigate = useNavigate();
@@ -163,6 +164,9 @@ export default function NewRequest() {
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-foreground gradient-text">הגשת בקשה לשילוט</h1>
              <p className="text-muted-foreground mt-1 text-balance">אנא מלא את כל פרטי הבקשה בהתאם להנחיות העירוניות</p>
+          </div>
+          <div className="mr-auto">
+            <AIMenu />
           </div>
         </div>
 

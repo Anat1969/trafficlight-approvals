@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { StatusBadge } from "@/components/StatusBadge";
 import { toast } from "sonner";
 import { SignageRequest } from "@/lib/mockData";
+import AIMenu from "@/components/AIMenu";
 
 const TrackRequest = () => {
   const { requests, updateRequest, isLoaded } = useRequests();
@@ -103,6 +104,7 @@ const TrackRequest = () => {
               <p className="text-sm text-muted-foreground">אזור אישי לבעלי עסקים</p>
             </div>
           </div>
+          <AIMenu />
         </div>
       </header>
 
